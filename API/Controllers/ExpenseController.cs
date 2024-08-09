@@ -18,13 +18,13 @@ namespace API.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<IEnumerable<Expense>> GetExpense(){
+        public async Task<IEnumerable<Expenses>> GetExpense(){
             var expenses = await _context.Expenses.AsNoTracking().ToListAsync();
             return expenses;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create (Expense expense){
+        public async Task<IActionResult> Create (Expenses expense){
             if (!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
@@ -58,7 +58,7 @@ namespace API.Controllers
 
      [HttpGet("{id:int}")]
 
-     public async Task<ActionResult<Expense>> GetExpense(int id){
+     public async Task<ActionResult<Expenses>> GetExpense(int id){
         var expense = await _context.Expenses.FindAsync(id);
         if(expense == null){
             return NotFound("Sorry, expense was not found");
@@ -67,7 +67,7 @@ namespace API.Controllers
      }
        [HttpPut("{id}")]
 
-    public async Task<IActionResult> UpdateExpense(int id, Expense expense)
+    public async Task<IActionResult> UpdateExpense(int id, Expenses expense)
     {
         if(id != expense.Id)
         {
